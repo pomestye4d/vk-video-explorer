@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<remoting xmlns="http://vga.com/elsa/meta-remoting" id="core">
+    <enum id="com.gridnine.platform.elsa.common.rest.core.RemotingEntityValueType">
+        <enum-item id="STRING"/>
+        <enum-item id="LOCAL_DATE"/>
+        <enum-item id="LOCAL_DATE_TIME"/>
+        <enum-item id="INSTANT"/>
+        <enum-item id="ENUM"/>
+        <enum-item id="CLASS"/>
+        <enum-item id="BOOLEAN"/>
+        <enum-item id="BYTE_ARRAY"/>
+        <enum-item id="ENTITY"/>
+        <enum-item id="ENTITY_REFERENCE"/>
+        <enum-item id="LONG"/>
+        <enum-item id="INT"/>
+        <enum-item id="BIG_DECIMAL"/>
+    </enum>
+    <enum id="com.gridnine.platform.elsa.common.rest.core.ServiceMethod">
+        <enum-item id="GET"/>
+        <enum-item id="POST"/>
+        <enum-item id="PUT"/>
+    </enum>
+    <enum id="com.gridnine.platform.elsa.common.rest.core.RemotingMessageType">
+        <enum-item id="PING"/>
+        <enum-item id="SUBSCRIPTION"/>
+    </enum>
+    <entity id="com.gridnine.platform.elsa.common.rest.core.RemotingMessage">
+        <property id="type" type="ENUM" class-name="com.gridnine.platform.elsa.common.rest.core.RemotingMessageType"
+                  non-nullable="true"/>
+        <property id="subscriptionId" type="STRING"/>
+        <property id="callId" type="STRING"/>
+        <property id="groupId" type="STRING"/>
+        <property id="remotingId" type="STRING"/>
+        <property id="data" type="STRING" non-nullable="true"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.rest.core.RemotingEntityPropertyDescription">
+        <property id="type" type="ENUM" class-name="com.gridnine.platform.elsa.common.rest.core.RemotingEntityValueType"
+                  non-nullable="true"/>
+        <property id="id" type="STRING" non-nullable="true"/>
+        <property id="className" type="STRING"/>
+        <property id="isAbstract" type="BOOLEAN" non-nullable="true"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.rest.core.RemotingEntityCollectionDescription">
+        <property id="elementType" type="ENUM"
+                  class-name="com.gridnine.platform.elsa.common.rest.core.RemotingEntityValueType" non-nullable="true"/>
+        <property id="id" type="STRING" non-nullable="true"/>
+        <property id="elementClassName" type="STRING"/>
+        <property id="elementIsAbstract" type="BOOLEAN" non-nullable="true"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.rest.core.RemotingEntityMapDescription">
+        <property id="id" type="STRING" non-nullable="true"/>
+        <property id="keyType" type="ENUM"
+                  class-name="com.gridnine.platform.elsa.common.rest.core.RemotingEntityValueType" non-nullable="true"/>
+        <property id="keyIsAbstract" type="BOOLEAN" non-nullable="true"/>
+        <property id="keyClassName" type="STRING"/>
+        <property id="valueType" type="ENUM"
+                  class-name="com.gridnine.platform.elsa.common.rest.core.RemotingEntityValueType" non-nullable="true"/>
+        <property id="valueClassName" type="STRING"/>
+        <property id="valueIsAbstract" type="BOOLEAN" non-nullable="true"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.rest.core.RemotingEntityDescription">
+        <collection id="properties" element-type="ENTITY"
+                    element-class-name="com.gridnine.platform.elsa.common.rest.core.RemotingEntityPropertyDescription"/>
+        <collection id="collections" element-type="ENTITY"
+                    element-class-name="com.gridnine.platform.elsa.common.rest.core.RemotingEntityCollectionDescription"/>
+        <collection id="maps" element-type="ENTITY"
+                    element-class-name="com.gridnine.platform.elsa.common.rest.core.RemotingEntityMapDescription"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.rest.core.XmlNodeDT">
+        <property id="name" type="STRING" non-nullable="true"/>
+        <property id="value" type="STRING"/>
+        <map id="attributes" key-type="STRING" value-type="STRING"/>
+        <collection id="children" element-type="ENTITY"
+                    element-class-name="com.gridnine.platform.elsa.common.rest.core.XmlNodeDT"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.remoting.core.RL10nMessageParameterDescription">
+        <property id="id" type="STRING" non-nullable="true"/>
+        <property id="valueType" type="ENUM" class-name="com.gridnine.platform.elsa.common.rest.core.RemotingEntityValueType" non-nullable="true"/>
+        <property id="collection" type="BOOLEAN"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.remoting.core.RL10nMessageDescription">
+        <property id="id" type="STRING" non-nullable="true"/>
+        <property id="displayName" type="STRING" non-nullable="true"/>
+        <collection id="parameters" element-type="ENTITY"  element-class-name="com.gridnine.platform.elsa.common.remoting.core.RL10nMessageParameterDescription"/>
+    </entity>
+    <group id="l10n">
+        <service id="get-bundle" method="GET" path="bundle">
+            <request id="com.gridnine.platform.elsa.common.remoting.core.GetL10nBundleRequest">
+                <property id="language" type="STRING"/>
+                <property id="bundleId" type="STRING"/>
+            </request>
+            <response id="com.gridnine.platform.elsa.common.remoting.core.GetL10nBundleResponse">
+                <collection id="messages" element-type="ENTITY" element-class-name="com.gridnine.platform.elsa.common.remoting.core.RL10nMessageDescription"/>
+            </response>
+        </service>
+    </group>
+    <group id="meta">
+        <service id="get-service-description" method="GET" path="service-description">
+            <request id="com.gridnine.platform.elsa.common.rest.core.GetServiceDescriptionRequest">
+                <property id="remotingId" type="STRING" non-nullable="true"/>
+                <property id="groupId" type="STRING" non-nullable="true"/>
+                <property id="serviceId" type="STRING" non-nullable="true"/>
+            </request>
+            <response id="com.gridnine.platform.elsa.common.rest.core.GetServiceDescriptionResponse">
+                <property id="requestClassName" type="STRING"/>
+                <property id="responseClassName" type="STRING"/>
+                <property id="path" type="STRING" non-nullable="true"/>
+                <property id="method" type="ENUM" class-name="com.gridnine.platform.elsa.common.rest.core.ServiceMethod" non-nullable="true"/>
+            </response>
+        </service>
+        <service id="get-subscription-description" method="GET" path="subscription-description">
+            <request id="com.gridnine.platform.elsa.common.rest.core.GetSubscriptionDescriptionRequest">
+                <property id="remotingId" type="STRING" non-nullable="true"/>
+                <property id="groupId" type="STRING" non-nullable="true"/>
+                <property id="subscriptionId" type="STRING" non-nullable="true"/>
+            </request>
+            <response id="com.gridnine.platform.elsa.common.rest.core.GetSubscriptionDescriptionResponse">
+                <property id="parameterClassName" type="STRING"/>
+                <property id="eventClassName" type="STRING"/>
+            </response>
+        </service>
+        <service id="get-entity-description" method="GET" path="entity-description">
+            <request id="com.gridnine.platform.elsa.common.rest.core.GetRemotingEntityDescriptionRequest">
+                <property id="entityId" type="STRING" non-nullable="true"/>
+            </request>
+            <response id="com.gridnine.platform.elsa.common.rest.core.GetRemotingEntityDescriptionResponse">
+                <property id="description" type="ENTITY" non-nullable="true"
+                          class-name="com.gridnine.platform.elsa.common.rest.core.RemotingEntityDescription"/>
+            </response>
+        </service>
+    </group>
+</remoting>

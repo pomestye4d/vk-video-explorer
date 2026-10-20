@@ -1,0 +1,8 @@
+/pg-data/
+/src/main/java-gen/
+/src/main/resources/static/
+/build/
+/.gradle/
+/out/
+gradle.properties
+/local-dev/temp/

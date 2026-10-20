@@ -1,0 +1,415 @@
+<schema targetNamespace="http://vga.com/elsa/meta-admin-ui"
+        elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://vga.com/elsa/meta-admin-ui"
+        xmlns:common="http://vga.com/elsa/meta-common">
+    <element name="admin-ui">
+        <complexType>
+            <sequence>
+                <choice maxOccurs="unbounded" minOccurs="0">
+                    <group ref="tns:AllRootElementsGroup"/>
+                    <element name="enum">
+                        <complexType>
+                            <complexContent>
+                                <extension base="common:MetaElementType">
+                                    <sequence>
+                                        <element name="enum-item" maxOccurs="unbounded"
+                                                 minOccurs="0" type="common:MetaElementType"/>
+                                    </sequence>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+                    <element name="entity" type="tns:EntityWithId"/>
+                </choice>
+            </sequence>
+        </complexType>
+    </element>
+    <group name="AllRootElementsGroup">
+        <choice>
+            <element name="form" type="tns:RootForm"/>
+            <element name="grid" type="tns:RootGridType"/>
+            <element name="tabs" type="tns:RootTabsType"/>
+            <element name="div" type="tns:RootDivType"/>
+        </choice>
+    </group>
+    <group name="AllElementsGroup">
+        <choice>
+            <element name="form" type="tns:Form"/>
+            <element name="grid" type="tns:Grid"/>
+            <element name="div" type="tns:DivType"/>
+            <element name="tabs" type="tns:TabsType"/>
+            <element name="rich-text-editor" type="tns:StandaloneRichTextEditorType"/>
+            <element name="editable-table" type="tns:StandaloneEditableTableType"/>
+            <element name="button" type="tns:StandaloneButtonType"/>
+            <element name="text-field" type="tns:StandaloneTextFieldType"/>
+        </choice>
+    </group>
+    <complexType name="Form">
+        <sequence minOccurs="0" maxOccurs="unbounded">
+            <group ref="tns:AllFormControls"/>
+        </sequence>
+        <attribute name="id" type="string"/>
+        <attribute name="title" type="string"/>
+    </complexType>
+    <complexType name="Grid">
+        <sequence minOccurs="1" maxOccurs="unbounded">
+            <element name="row" type="tns:RowType"/>
+        </sequence>
+    </complexType>
+    <complexType name="RootForm">
+        <sequence minOccurs="0" maxOccurs="unbounded">
+            <group ref="tns:AllFormControls"/>
+        </sequence>
+        <attribute name="class-name" type="string" use="required"/>
+    </complexType>
+    <group name="AllFormControls">
+        <choice>
+            <element type="tns:FormSelectType" name="select"/>
+            <element type="tns:FormMultiSelectType" name="multi-select"/>
+            <element type="tns:FormTextFieldType" name="text-field"/>
+            <element type="tns:FormEnumSelectType" name="enum-select"/>
+            <element type="tns:FormEnumMultiSelectType" name="enum-multi-select"/>
+            <element type="tns:FormIntFieldType" name="int-field"/>
+            <element type="tns:FormLinkFieldType" name="link-field"/>
+            <element type="tns:FormFilesType" name="files-field"/>
+            <element type="tns:FormRemoteSelectType" name="remote-select"/>
+            <element type="tns:FormRemoteMultiSelectType" name="remote-multi-select"/>
+            <element type="tns:FormCustomType" name="custom"/>
+            <element type="tns:FormDateIntervalFieldType" name="date-interval-field"/>
+            <element type="tns:FormLocalFieldType" name="local-date-field"/>
+            <element type="tns:FormLocalFieldType" name="local-time-field"/>
+            <element type="tns:FormLocalFieldType" name="local-period-field"/>
+            <element type="tns:FormBooleanFieldType" name="boolean-field"/>
+            <element type="tns:FormReferencesListFieldType" name="references-list"/>
+            <element type="tns:FormTextAreaType" name="text-area"/>
+            <element name="entities-list" type="tns:FormEntitiesListType"/>
+            <element name="rich-text-editor" type="tns:FormRichTextEditorType"/>
+            <element type="tns:FormBigDecimalFieldType" name="big-decimal-field"/>
+            <element type="tns:FormHiddenFieldType" name="hidden-field"/>
+            <element type="tns:FormLabelWithToolsType" name="label-with-tools"/>
+            <element type="tns:FormDivType" name="div"/>
+        </choice>
+    </group>
+    <complexType name="EntityWithId">
+        <complexContent>
+            <extension base="tns:Entity">
+                <attribute name="id" use="required"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="Entity">
+        <sequence>
+            <element name="property" type="common:PropertyType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+            <element name="collection" type="common:CollectionType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+            <element name="map" type="common:MapType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="BaseFormElementType">
+        <complexContent>
+            <extension base="common:MetaElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormSelectType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <attribute name="enum-class-name" type="string"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="FormMultiSelectType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <attribute name="enum-class-name" type="string"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="FormTextFieldType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormHiddenFieldType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormIntFieldType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormLinkFieldType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormFilesType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormDateIntervalFieldType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormLocalFieldType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormLabelWithToolsType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <attribute name="style" type="string"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="FormDivType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <sequence minOccurs="0" maxOccurs="unbounded">
+                    <group ref="tns:AllElementsGroup"/>
+                </sequence>
+                <attribute name="style" type="string"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="FormTextAreaType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormBooleanFieldType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormReferencesListFieldType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormRemoteSelectType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <attribute name="class-name" type="string" use="required"/>
+                <attribute name="allow-add-new-item" type="boolean"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="FormEnumSelectType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <attribute name="class-name" type="string" use="required"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="FormEnumMultiSelectType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <attribute name="class-name" type="string" use="required"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="FormRemoteMultiSelectType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <attribute name="class-name" type="string" use="required"/>
+                <attribute name="allow-add-new-item" type="boolean"/>
+                <attribute name="order-editable" type="boolean"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="FormCustomType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <attribute name="class-name" type="string" use="required"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="BaseRootElementType">
+        <attribute name="class-name" type="string" use="required"/>
+    </complexType>
+
+    <complexType name="ColumnType">
+        <choice minOccurs="1" maxOccurs="unbounded">
+            <group ref="tns:AllElementsGroup"/>
+        </choice>
+        <attribute name="small-width" type="int"/>
+        <attribute name="standard-width" type="int"/>
+        <attribute name="large-width" type="int"/>
+    </complexType>
+    <complexType name="RowType">
+        <sequence minOccurs="1" maxOccurs="unbounded">
+            <element name="column" type="tns:ColumnType"/>
+        </sequence>
+    </complexType>
+    <complexType name="RootGridType">
+        <sequence minOccurs="1" maxOccurs="unbounded">
+            <element name="row" type="tns:RowType"/>
+        </sequence>
+        <attribute name="class-name" type="string" use="required"/>
+    </complexType>
+    <complexType name="FormEntitiesListType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <sequence>
+                    <group ref="tns:AllElementsGroup"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="RootTabsType">
+        <sequence minOccurs="1" maxOccurs="unbounded">
+            <element name="tab" type="tns:TabType"/>
+        </sequence>
+        <attribute name="class-name" type="string" use="required"/>
+    </complexType>
+    <complexType name="TabsType">
+        <sequence minOccurs="1" maxOccurs="unbounded">
+            <element name="tab" type="tns:TabType"/>
+        </sequence>
+    </complexType>
+    <complexType name="TabType">
+        <sequence minOccurs="0" maxOccurs="unbounded">
+            <choice minOccurs="0" maxOccurs="unbounded">
+                <group ref="tns:AllFormControls"/>
+                <group ref="tns:AllElementsGroup"/>
+            </choice>
+        </sequence>
+        <attribute name="id" type="string" use="required"/>
+        <attribute name="title" type="string"/>
+        <attribute name="dedicated-acl" type="boolean"/>
+    </complexType>
+    <complexType name="FormRichTextEditorType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="FormBigDecimalFieldType">
+        <complexContent>
+            <extension base="tns:BaseFormElementType">
+                <attribute name="precision" type="int"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="StandaloneRichTextEditorType">
+        <attribute name="id" type="string" use="required"/>
+        <attribute name="style" type="string"/>
+    </complexType>
+    <simpleType name="EditableTableColumnTypeEnum">
+        <restriction base="string">
+            <enumeration value="STRING"/>
+            <enumeration value="NUMBER"/>
+            <enumeration value="LINK"/>
+            <enumeration value="MONEY"/>
+            <enumeration value="BUTTON"/>
+            <enumeration value="DROP_DOWN_BUTTON"/>
+        </restriction>
+    </simpleType>
+    <simpleType name="EditableTableSelectionModeEnum">
+        <restriction base="string">
+            <enumeration value="NONE"/>
+            <enumeration value="SINGLE"/>
+            <enumeration value="MULTIPLE"/>
+        </restriction>
+    </simpleType>
+    <simpleType name="EditableTableSummaryColumnTypeEnum">
+        <restriction base="string">
+            <enumeration value="LABEL"/>
+            <enumeration value="NUMBER"/>
+            <enumeration value="MONEY"/>
+            <enumeration value="STRING"/>
+        </restriction>
+    </simpleType>
+    <complexType name="StandaloneButtonType">
+        <attribute name="id" type="string" use="required"/>
+        <attribute name="tooltip" type="string"/>
+        <attribute name="title" type="string"/>
+        <attribute name="icon" type="string"/>
+        <attribute name="enabling-expression" type="string"/>
+    </complexType>
+    <complexType name="StandaloneTextFieldType">
+        <attribute name="id" type="string" use="required"/>
+        <attribute name="placeholder" type="string"/>
+        <attribute name="enabling-expression" type="string"/>
+        <attribute name="debounce-time" type="int"/>
+        <attribute name="deferred" type="boolean"/>
+        <attribute name="style" type="string"/>
+    </complexType>
+    <complexType name="StandaloneEditableTableType">
+        <sequence>
+            <element name="columns" minOccurs="0">
+                <complexType>
+                    <sequence>
+                        <element name="column" maxOccurs="unbounded">
+                            <complexType>
+                                <sequence minOccurs="0" maxOccurs="unbounded">
+                                    <element name="button">
+                                        <complexType>
+                                            <attribute name="id" type="string" use="required"/>
+                                            <attribute name="title" type="string"/>
+                                            <attribute name="icon" type="string"/>
+                                            <attribute name="enabling-expression" type="string"/>
+                                        </complexType>
+                                    </element>
+                                </sequence>
+                                <attribute name="id" type="string" use="required"/>
+                                <attribute name="title" type="string"/>
+                                <attribute name="type" type="tns:EditableTableColumnTypeEnum" use="required"/>
+                                <attribute name="width" type="int"/>
+                                <attribute name="editable" type="boolean"/>
+                                <attribute name="icon" type="string"/>
+                                <attribute name="enabling-expression" type="string"/>
+                            </complexType>
+                        </element>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="summary" minOccurs="0">
+                <complexType>
+                    <sequence>
+                        <element name="row" maxOccurs="unbounded" minOccurs="0">
+                            <complexType>
+                                <sequence>
+                                    <element name="column" maxOccurs="unbounded">
+                                        <complexType>
+                                            <attribute name="id" type="string" use="required"/>
+                                            <attribute name="type" type="tns:EditableTableSummaryColumnTypeEnum"
+                                                       use="required"/>
+                                            <attribute name="label" type="string"/>
+                                            <attribute name="rowSpan" type="int"/>
+                                            <attribute name="columnSpan" type="int"/>
+                                        </complexType>
+                                    </element>
+                                </sequence>
+                            </complexType>
+                        </element>
+                    </sequence>
+                </complexType>
+            </element>
+        </sequence>
+        <attribute name="id" type="string" use="required"/>
+        <attribute name="style" type="string"/>
+        <attribute name="title" type="string"/>
+        <attribute name="selectionMode" type="tns:EditableTableSelectionModeEnum"/>
+    </complexType>
+    <complexType name="RootDivType">
+        <sequence minOccurs="0" maxOccurs="unbounded">
+            <group ref="tns:AllElementsGroup"/>
+        </sequence>
+        <attribute name="class-name" type="string" use="required"/>
+        <attribute name="style" type="string"/>
+    </complexType>
+    <complexType name="DivType">
+        <sequence minOccurs="0" maxOccurs="unbounded">
+            <group ref="tns:AllElementsGroup"/>
+        </sequence>
+        <attribute name="id" type="string"/>
+        <attribute name="style" type="string"/>
+    </complexType>
+</schema>

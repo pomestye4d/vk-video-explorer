@@ -1,0 +1,92 @@
+{
+    "name": "jtasks",
+    "version": "0.0.1",
+    "description": "JTasks",
+    "license": "MIT",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "type": "module",
+    "files": [
+        "src"
+    ],
+    "engines": {
+        "node": ">=10"
+    },
+    "scripts": {
+        "start": "vite",
+        "build": "tsc && vite build",
+        "lint": "eslint src  --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@ant-design/icons": "^6.3.2",
+        "@dnd-kit/core": "^6.3.1",
+        "@dnd-kit/sortable": "^10.0.0",
+        "@dnd-kit/utilities": "^3.2.2",
+        "@embedpdf/react-pdf-viewer": "^2.15.0",
+        "@mdxeditor/editor": "^4.2.3",
+        "@monaco-editor/react": "^4.7.0",
+        "antd": "^6.6.2",
+        "dayjs": "^1.11.23",
+        "html2canvas": "^1.4.1",
+        "jspdf": "^4.2.1",
+        "lodash": "^4.18.1",
+        "moment": "^2.31.0",
+        "monaco-editor": "^0.56.0",
+        "react": "^19.2.8",
+        "react-dom": "^19.2.8",
+        "styled-components": "^6.5.3",
+        "use-breakpoint": "^4.0.10"
+    },
+    "prettier": {
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": true,
+        "singleQuote": true,
+        "useTabs": false,
+        "printWidth": 88
+    },
+    "devDependencies": {
+        "@eslint/compat": "^1.4.1",
+        "@eslint/eslintrc": "^3.3.6",
+        "@eslint/js": "^9.39.5",
+        "@types/node": "^26.4.0",
+        "@types/react": "^19.2.18",
+        "@types/react-dom": "^19.2.5",
+        "@typescript-eslint/eslint-plugin": "^8.68.0",
+        "@typescript-eslint/parser": "^8.68.0",
+        "@vite-pwa/assets-generator": "^1.0.2",
+        "@vitejs/plugin-react": "^6.1.1",
+        "babel-plugin-styled-components": "^2.3.0",
+        "eslint": "^9.39.5",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.6",
+        "globals": "^17.11.0",
+        "prettier": "^3.9.6",
+        "sass": "^1.103.1",
+        "size-limit": "^13.0.3",
+        "tsdef": "^0.0.14",
+        "tslib": "^2.8.1",
+        "typescript": "^5.9.3",
+        "vite": "^8.2.2",
+        "vite-dts": "^1.0.4",
+        "vite-plugin-dts": "^5.0.3",
+        "vite-plugin-pwa": "^1.3.0",
+        "workbox-core": "^7.4.1",
+        "workbox-window": "^7.4.1"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "^4.63.1"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "overrides": {
+        "sharp": "^0.35.4",
+        "sharp-ico": "^0.1.5"
+    },
+    "allowScripts": {
+        "core-js@3.50.0": true,
+        "@parcel/watcher@2.6.0": true
+    }
+}

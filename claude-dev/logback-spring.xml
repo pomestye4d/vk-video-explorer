@@ -1,0 +1,48 @@
+<configuration>
+    <springProfile name="dev">
+        <!-- Console Appender -->
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <!-- Define the log pattern including the Spring application name -->
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level - %logger{36} - %msg%n</Pattern>
+            </layout>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+        <logger name="ru.vga.vk.video" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+        <logger name="com.atomikos.datasource.xa.XATransactionalResource" level="ERROR">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+    </springProfile>
+    <springProfile name="prod">
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <!-- Use the LOG_FILE property if set in application.properties, otherwise default to logs/app.log -->
+            <file>logs/vk-video-server-local.log</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- Daily rollover, compressing old files -->
+                <fileNamePattern>logs/vk-video-server-local.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+                <!-- Keep 7 days' worth of history -->
+                <maxHistory>7</maxHistory>
+                <!-- Optional: total size cap of 1GB -->
+                <totalSizeCap>512MB</totalSizeCap>
+            </rollingPolicy>
+
+            <encoder>
+                <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="FILE" />
+        </root>
+        <logger name="ru.vga.vk.video" level="DEBUG" additivity="false">
+            <appender-ref ref="FILE" />
+        </logger>
+        <logger name="com.atomikos.datasource.xa.XATransactionalResource" level="ERROR" additivity="false">
+            <appender-ref ref="FILE" />
+        </logger>
+    </springProfile>
+</configuration>

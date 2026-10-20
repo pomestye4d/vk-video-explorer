@@ -1,0 +1,10 @@
+/.gradle/
+/build/
+/out/
+/node_modules/
+/src/generated/
+/dist/
+package-lock.json
+/src-gen/*
+/src-gen/
+/temp/

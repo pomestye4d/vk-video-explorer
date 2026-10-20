@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://vga.com/elsa/meta-custom"
+        elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:common="http://vga.com/elsa/meta-common">
+    <element name="custom">
+        <complexType>
+            <sequence>
+                <choice maxOccurs="unbounded" minOccurs="0">
+                    <element name="entity">
+                        <complexType>
+                            <complexContent>
+                                <extension base="common:MetaElementType">
+                                    <sequence>
+                                        <choice maxOccurs="unbounded" minOccurs="0">
+                                            <element name="property" type="common:PropertyType"/>
+                                            <element name="collection" type="common:CollectionType"/>
+                                            <element name="map" type="common:MapType"/>
+                                        </choice>
+                                    </sequence>
+                                    <attribute name="abstract" type="boolean"
+                                               default="false"/>
+                                    <attribute name="extends" type="string"/>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+                    <element name="enum">
+                        <complexType>
+                            <complexContent>
+                                <extension base="common:MetaElementType">
+                                    <sequence>
+                                        <element name="enum-item" maxOccurs="unbounded"
+                                                 minOccurs="0" type="common:MetaElementType"/>
+                                    </sequence>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+                </choice>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

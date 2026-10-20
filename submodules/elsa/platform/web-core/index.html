@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Hello WebSocket</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="module" src="/src/example.ts"></script>
+</head>
+<body>
+<div id="main-content" class="container">
+    <div class="row">
+        <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="web-socket-status" class="form-label">WebSocket status</label>
+                    <input type="text" class="form-control" id="web-socket-status" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="parameter" class="form-label">Parameter</label>
+                    <textarea id="parameter" style="height: 200px;vertical-align: top"></textarea>
+                    <button id="subscribe" class="btn btn-default">Subscribe</button>
+                </div>
+                <div class="mb-3">
+                    <label for="subscription-status" class="form-label">Subscription status</label>
+                    <input type="text" class="form-control" id="subscription-status" disabled>
+                    <button id="unsubscribe" class="btn btn-default">Unsubscribe</button>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="conversation" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Events</th>
+                </tr>
+                </thead>
+                <tbody id="greetings">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

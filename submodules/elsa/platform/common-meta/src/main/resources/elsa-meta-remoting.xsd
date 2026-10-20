@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://vga.com/elsa/meta-remoting"
+        elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://vga.com/elsa/meta-remoting"
+        xmlns:common="http://vga.com/elsa/meta-common">
+    <element name="remoting">
+        <complexType>
+            <complexContent>
+                <extension base="common:MetaElementType">
+                    <sequence>
+                        <choice maxOccurs="unbounded" minOccurs="0">
+                            <element name="entity" type="tns:EntityType"/>
+                            <element name="enum">
+                                <complexType>
+                                    <complexContent>
+                                        <extension base="common:MetaElementType">
+                                            <sequence>
+                                                <element name="enum-item" maxOccurs="unbounded"
+                                                         minOccurs="0" type="common:MetaElementType"/>
+                                            </sequence>
+                                        </extension>
+                                    </complexContent>
+                                </complexType>
+                            </element>
+                            <element name="group">
+                                <complexType>
+                                    <complexContent>
+                                        <extension base="common:MetaElementType">
+                                            <sequence>
+                                                <choice maxOccurs="unbounded" minOccurs="0">
+                                                    <element name="service">
+                                                        <complexType>
+                                                            <complexContent>
+                                                                <extension base="common:MetaElementType">
+                                                                    <sequence>
+                                                                        <choice minOccurs="0">
+                                                                            <element name="request">
+                                                                                <complexType>
+                                                                                    <complexContent>
+                                                                                        <extension
+                                                                                                base="tns:EntityType">
+                                                                                            <attribute name="multipart"
+                                                                                                       type="boolean"
+                                                                                                       default="false"/>
+                                                                                        </extension>
+                                                                                    </complexContent>
+                                                                                </complexType>
+                                                                            </element>
+                                                                            <element name="request-ref"
+                                                                                     type="common:MetaElementType"/>
+                                                                        </choice>
+                                                                        <choice minOccurs="0">
+                                                                            <element name="response"
+                                                                                     type="tns:EntityType"/>
+                                                                            <element name="response-ref"
+                                                                                     type="common:MetaElementType"/>
+                                                                        </choice>
+                                                                    </sequence>
+                                                                    <attribute name="method" type="tns:HttpMethod"
+                                                                               default="POST"/>
+                                                                    <attribute name="path" type="string"/>
+                                                                </extension>
+                                                            </complexContent>
+                                                        </complexType>
+                                                    </element>
+                                                    <element name="subscription">
+                                                        <complexType>
+                                                            <complexContent>
+                                                                <extension base="common:MetaElementType">
+                                                                    <sequence>
+                                                                        <element name="parameter"
+                                                                                 type="tns:EntityType"/>
+                                                                        <element name="event" type="tns:EntityType"/>
+                                                                    </sequence>
+                                                                </extension>
+                                                            </complexContent>
+                                                        </complexType>
+                                                    </element>
+                                                </choice>
+                                            </sequence>
+                                        </extension>
+                                    </complexContent>
+                                </complexType>
+                            </element>
+                        </choice>
+                    </sequence>
+                </extension>
+            </complexContent>
+        </complexType>
+
+    </element>
+    <complexType name="EntityType">
+        <complexContent>
+            <extension base="common:MetaElementType">
+                <sequence>
+                    <choice maxOccurs="unbounded" minOccurs="0">
+                        <element name="property" type="common:PropertyType"/>
+                        <element name="collection" type="common:CollectionType"/>
+                        <element name="map" type="common:MapType"/>
+                    </choice>
+                </sequence>
+                <attribute name="abstract" type="boolean"
+                           default="false"/>
+                <attribute name="extends" type="string"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <simpleType name="HttpMethod">
+        <restriction base="string">
+            <enumeration value="GET"/>
+            <enumeration value="POST"/>
+            <enumeration value="PUT"/>
+            <enumeration value="DELETE"/>
+        </restriction>
+    </simpleType>
+</schema>

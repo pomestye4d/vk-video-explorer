@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/simple-site-server/elsa.demo.simple-site-server.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/simple-site-server/elsa.demo.simple-site-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/platform/server-atomikos/elsa.platform.server-atomikos.iml" filepath="$PROJECT_DIR$/.idea/modules/platform/server-atomikos/elsa.platform.server-atomikos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/platform/server-file-storage/elsa.platform.server-file-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/platform/server-file-storage/elsa.platform.server-file-storage.iml" />
+    </modules>
+  </component>
+</project>

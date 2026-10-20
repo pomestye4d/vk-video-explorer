@@ -1,0 +1,22 @@
+server:
+  port: 9092
+  externalUrl: ${EXTERNAL_URL:http://localhost:5175}
+
+elsa:
+  storage:
+    type: STANDARD
+    databaseType: SIMPLE-ATOMIKOS
+    adapter: postgres
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5440}/${DB_NAME:vk-video}?loginTimeout=10
+    poolSize: 20
+    login: ${DB_USER:admin}
+    password: ${DB_PASSWORD:admin}
+
+
+spring.profiles.active: dev
+spring.output.ansi.enabled: ALWAYS
+
+logging:
+  config: logback-spring.xml
+
+

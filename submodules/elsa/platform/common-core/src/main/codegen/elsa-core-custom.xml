@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom xmlns="http://vga.com/elsa/meta-custom">
+    <entity id="java.lang.Object" abstract="true"/>
+    <entity id="com.gridnine.platform.elsa.common.core.model.common.BaseIdentity" abstract="true">
+        <property id="id" type="UUID"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.core.model.domain.BaseAsset" abstract="true"
+            extends="com.gridnine.platform.elsa.common.core.model.common.BaseIdentity">
+        <property id="versionInfo" type="ENTITY"
+                  class-name="com.gridnine.platform.elsa.common.core.model.domain.VersionInfo"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.core.model.domain.BaseSearchableProjection" abstract="true">
+        <property id="document" type="ENTITY_REFERENCE" class-name="Object"/>
+        <property id="navigationKey" type="INT"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.core.model.common.L10nMessage">
+        <property id="key" type="STRING"/>
+        <property id="bundle" type="STRING"/>
+        <collection id="parameters" element-type="ENTITY" element-class-name="Object"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.core.model.domain.VersionInfo">
+        <property id="versionNumber" type="INT"/>
+        <property id="revision" type="INT"/>
+        <property id="modifiedBy" type="STRING"/>
+        <property id="modified" type="INSTANT"/>
+        <property id="comment" type="STRING"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.core.model.domain.BaseDocument" abstract="true"
+            extends="com.gridnine.platform.elsa.common.core.model.common.BaseIdentity">
+        <property id="versionInfo" type="ENTITY"
+                  class-name="com.gridnine.platform.elsa.common.core.model.domain.VersionInfo"/>
+    </entity>
+</custom>

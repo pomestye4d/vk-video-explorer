@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <excludedPredefinedLibrary name="vk-video-explorer/submodules/elsa/platform/web-admin/build/nodejs/node-v22.18.0-win-x64/node_modules" />
+    <excludedPredefinedLibrary name="vk-video-explorer/submodules/elsa/platform/web-admin/node_modules" />
+    <excludedPredefinedLibrary name="vk-video-explorer/submodules/elsa/submodules/webpeer/web/core/node_modules" />
+    <excludedPredefinedLibrary name="vk-video-explorer/webapp/frontend/build/nodejs/node-v22.18.0-win-x64/node_modules" />
+  </component>
+</project>

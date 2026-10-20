@@ -22,3 +22,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+/.gradle/
+/build/
+/local-dev/pg-data/
+/local-dev/pg-partitions/
+*.classpath
+*.project
+*.prefs
+/**/bin/
+/webapp/backend/temp/
+/local-dev/documents/
+/local-dev/temp/
+/claude-dev/documents/
+/claude-dev/pg-data/
+/claude-dev/pg-partitions/
+/.claude/settings.local.json
+/claude-dev/logs/
+/claude-dev/backend.out
+/claude-dev/frontend.out

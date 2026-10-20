@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages-bundle xmlns="http://vga.com/elsa/meta-l10n" id="core">
+    <message id="Found_several_records">
+        <parameter id="objectType" type="STRING"/>
+        <parameter id="propertyName" type="STRING"/>
+        <parameter id="propertyValue" type="STRING"/>
+    </message>
+    <message id="Object_not_found">
+        <parameter id="objectId" type="STRING"/>
+        <parameter id="objectUid" type="STRING"/>
+    </message>
+</messages-bundle>

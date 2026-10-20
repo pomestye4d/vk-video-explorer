@@ -1,0 +1,85 @@
+/*
+ * MIT License
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.gridnine.platform.elsa.gradle.codegen.webApp;
+
+import com.gridnine.platform.elsa.gradle.codegen.common.BaseCodeGenRecord;
+import com.gridnine.platform.elsa.gradle.codegen.common.GeneratorType;
+
+import java.io.File;
+
+public class WebWebAppCodeGenRecord extends BaseCodeGenRecord {
+
+    private File sourceDir;
+
+    private String commonPackageName;
+
+    private String configurator;
+
+    private boolean skipCommonClasses;
+
+    private String moduleName;
+
+    @Override
+    public GeneratorType getGeneratorType() {
+        return GeneratorType.WEB_WEB_APP;
+    }
+
+    public File getSourceDir() {
+        return sourceDir;
+    }
+
+    public void setSourceDir(File sourceDir) {
+        this.sourceDir = sourceDir;
+    }
+
+    public String getCommonPackageName() {
+        return commonPackageName;
+    }
+
+    public void setCommonPackageName(String commonPackageName) {
+        this.commonPackageName = commonPackageName;
+    }
+
+    public void setSkipCommonClasses(boolean skipCommonClasses) {
+        this.skipCommonClasses = skipCommonClasses;
+    }
+
+    public boolean isSkipCommonClasses() {
+        return skipCommonClasses;
+    }
+
+    public String getConfigurator() {
+        return configurator;
+    }
+
+    public void setConfigurator(String configurator) {
+        this.configurator = configurator;
+    }
+
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
+    public String getModuleName() {
+        return moduleName;
+    }
+}

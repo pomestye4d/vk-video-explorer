@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain xmlns="http://vga.com/elsa/meta-domain">
+    <enum id="com.gridnine.platform.elsa.common.core.test.model.domain.TestEnum">
+        <enum-item id="ITEM1"/>
+        <enum-item id="ITEM2"/>
+        <enum-item id="ITEM3"/>
+    </enum>
+    <document id="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainDocument" cache-resolve="true">
+        <property type="STRING" id="stringProperty"/>
+        <property type="STRING" id="getAllProperty"/>
+        <collection element-type="STRING" id="stringCollection"/>
+        <property type="ENTITY" id="entityProperty"
+                  class-name="com.gridnine.platform.elsa.common.core.test.model.domain.BaseTestDomainNestedDocument"/>
+        <property type="ENUM" id="enumProperty"
+                  class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestEnum"/>
+        <property type="INSTANT" id="instantProperty"/>
+        <property id="entityReference" type="ENTITY_REFERENCE"
+                  class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainDocument"/>
+        <collection element-type="ENTITY" id="entityCollection"
+                    element-class-name="com.gridnine.platform.elsa.common.core.test.model.domain.BaseTestDomainNestedDocument"/>
+        <collection element-type="ENTITY"
+                    element-class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestGroup"
+                    id="groups"/>
+        <collection element-type="ENUM" id="enumCollection"
+                    element-class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestEnum"/>
+        <collection element-type="ENTITY_REFERENCE" id="entityRefCollection"
+                    element-class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainDocument"/>
+        <caption-expression>stringProperty</caption-expression>
+    </document>
+    <entity id="com.gridnine.platform.elsa.common.core.test.model.domain.BaseTestDomainNestedDocument" abstract="true">
+        <property type="STRING" id="name"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainNestedDocumentImpl"
+            extends="com.gridnine.platform.elsa.common.core.test.model.domain.BaseTestDomainNestedDocument">
+        <property type="STRING" id="value"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.core.test.model.domain.TestGroup">
+        <property type="STRING" id="name"/>
+        <collection element-type="ENTITY"
+                    element-class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestItem" id="items"/>
+    </entity>
+    <entity id="com.gridnine.platform.elsa.common.core.test.model.domain.TestItem">
+        <property type="STRING" id="name"/>
+    </entity>
+    <searchable-projection document="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainDocument"
+                           id="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainDocumentProjection">
+        <property type="STRING" id="stringProperty" cache-find="true" use-in-text-search="true"/>
+        <property type="STRING" id="getAllProperty" cache-get-all="true"/>
+        <property type="INSTANT" id="instantProperty"/>
+        <collection element-type="STRING" id="stringCollection" use-in-text-search="true"/>
+        <property type="ENUM" id="enumProperty"
+                  class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestEnum"
+                  use-in-text-search="true"/>
+        <property id="entityReference" type="ENTITY_REFERENCE"
+                  class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainDocument"
+                  use-in-text-search="true"/>
+        <collection element-type="ENUM" id="enumCollection"
+                    element-class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestEnum"
+                    use-in-text-search="true"/>
+        <collection element-type="ENTITY_REFERENCE" id="entityRefCollection"
+                    element-class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainDocument"
+                    use-in-text-search="true"/>
+    </searchable-projection>
+    <asset id="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainAsset" cache-resolve="true">
+        <property type="STRING" id="stringProperty" cache-find="true" use-in-text-search="true"/>
+        <property id="dateProperty" type="LOCAL_DATE_TIME"/>
+        <property id="localJoinedField" type="UUID"/>
+        <property id="logItem" type="ENTITY" class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestLogItem"/>
+        <property id="searchableText" type="TEXT_SEARCH"/>
+        <collection id="log" element-type="ENTITY" element-class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestLogItem"/>
+        <caption-expression>stringProperty</caption-expression>
+    </asset>
+    <asset id="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainJoinedAsset">
+        <property type="STRING" id="joinedProperty"/>
+        <caption-expression>joinedProperty</caption-expression>
+    </asset>
+    <virtual-asset id="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainVirtualAsset" base-asset="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainAsset" included-fields=".*">
+        <join joined-entity="com.gridnine.platform.elsa.common.core.test.model.domain.TestDomainJoinedAsset"
+              primary-key="id" foreign-key="localJoinedField" included-fields="joinedProperty"/>
+    </virtual-asset>
+    <enum id="com.gridnine.platform.elsa.common.core.test.model.domain.TestSettingsType">
+        <enum-item id="TEST_TYPE"/>
+    </enum>
+    <document id="com.gridnine.platform.elsa.common.core.test.model.domain.BaseTestSettings" abstract="true">
+        <property id="key" type="ENUM"
+                  class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestSettingsType"/>
+        <property id="name" type="STRING"/>
+    </document>
+    <document id="com.gridnine.platform.elsa.common.core.test.model.domain.TestProjectSettings"
+              extends="com.gridnine.platform.elsa.common.core.test.model.domain.BaseTestSettings" cache-resolve="true">
+        <property id="specific" type="STRING"/>
+    </document>
+    <searchable-projection id="com.gridnine.platform.elsa.common.core.test.model.domain.TestSettingsProjection"
+                           document="com.gridnine.platform.elsa.common.core.test.model.domain.BaseTestSettings">
+        <property id="key" type="ENUM"
+                  class-name="com.gridnine.platform.elsa.common.core.test.model.domain.TestSettingsType"
+                  cache-find="true" use-in-text-search="true"/>
+        <property id="name" type="STRING" use-in-text-search="true"/>
+    </searchable-projection>
+    <entity id="com.gridnine.platform.elsa.common.core.test.model.domain.TestLogItem">
+        <property type="STRING" id="who"/>
+        <property type="STRING" id="what"/>
+    </entity>
+</domain>

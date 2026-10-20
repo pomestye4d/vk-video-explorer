@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://vga.com/elsa/meta-domain"
+        elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://vga.com/elsa/meta-domain"
+        xmlns:common="http://vga.com/elsa/meta-common">
+    <element name="domain">
+        <complexType>
+            <sequence>
+                <choice maxOccurs="unbounded" minOccurs="0">
+                    <element name="document">
+                        <complexType>
+                            <complexContent>
+                                <extension base="common:MetaElementType">
+                                    <sequence>
+                                        <choice maxOccurs="unbounded" minOccurs="0">
+                                            <element name="parameter" type="common:ParameterType"/>
+                                            <element name="property" type="common:PropertyType"/>
+                                            <element name="collection" type="common:CollectionType"/>
+                                            <element name="map" type="common:MapType"/>
+                                        </choice>
+                                        <choice>
+                                            <element name="caption-expression" type="string"/>
+                                            <element name="localizable-caption-expression" type="string"/>
+                                        </choice>
+                                    </sequence>
+                                    <attribute name="abstract" type="boolean"
+                                               default="false"/>
+                                    <attribute name="extends" type="string"/>
+                                    <attribute name="cache-resolve" type="boolean"
+                                               default="false"/>
+                                    <attribute name="cache-caption" type="boolean"
+                                               default="false"/>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+                    <element name="entity">
+                        <complexType>
+                            <complexContent>
+                                <extension base="common:MetaElementType">
+                                    <sequence>
+                                        <choice maxOccurs="unbounded" minOccurs="0">
+                                            <element name="property" type="common:PropertyType"/>
+                                            <element name="collection" type="common:CollectionType"/>
+                                            <element name="map" type="common:MapType"/>
+                                        </choice>
+                                    </sequence>
+                                    <attribute name="abstract" type="boolean"
+                                               default="false"/>
+                                    <attribute name="extends" type="string"/>
+                                    <attribute name="has-id" type="boolean"/>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+                    <element name="enum">
+                        <complexType>
+                            <complexContent>
+                                <extension base="common:MetaElementType">
+                                    <sequence>
+                                        <element name="enum-item" maxOccurs="unbounded"
+                                                 minOccurs="0" type="common:MetaElementType"/>
+                                    </sequence>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+                    <element name="searchable-projection">
+                        <complexType>
+                            <complexContent>
+                                <extension base="tns:BaseSearchableType">
+                                    <attribute name="document" type="string" use="required">
+                                    </attribute>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+                    <element name="asset">
+                        <complexType>
+                            <complexContent>
+                                <extension base="tns:BaseSearchableType">
+                                    <sequence>
+                                        <choice>
+                                            <element name="caption-expression" type="string"/>
+                                            <element name="localizable-caption-expression" type="string"/>
+                                        </choice>
+                                    </sequence>
+                                    <attribute name="cache-resolve" type="boolean"
+                                               default="false"/>
+                                    <attribute name="cache-caption" type="boolean"
+                                               default="false"/>
+                                    <attribute name="extends" type="string"/>
+                                    <attribute name="abstract" type="boolean"
+                                               default="false"/>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+                    <element name="virtual-asset">
+                        <complexType>
+                            <complexContent>
+                                <extension base="common:MetaElementType">
+                                    <sequence>
+                                        <element name="join" type="tns:JoinType"/>
+                                    </sequence>
+                                    <attribute name="base-asset" type="string" use="required"/>
+                                    <attribute name="included-fields" type="string"/>
+                                    <attribute name="excluded-fields" type="string"/>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+
+                </choice>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="BaseSearchableType">
+        <complexContent>
+            <extension base="common:MetaElementType">
+                <sequence>
+                    <choice maxOccurs="unbounded" minOccurs="0">
+                        <element name="parameter" type="common:ParameterType"/>
+                        <element name="property">
+                            <complexType>
+                                <complexContent>
+                                    <extension base="common:MetaElementType">
+                                        <attribute name="cache-find" type="boolean"/>
+                                        <attribute name="cache-get-all" type="boolean"/>
+                                        <attribute name="type" type="tns:DatabasePropertyType" use="required"/>
+                                        <attribute name="class-name" type="string"/>
+                                        <attribute name="use-in-text-search" type="boolean"/>
+                                        <attribute name="non-nullable" type="boolean"/>
+                                    </extension>
+                                </complexContent>
+                            </complexType>
+                        </element>
+                        <element name="collection">
+                            <complexType>
+                                <complexContent>
+                                    <extension base="common:MetaElementType">
+                                        <attribute name="unique" type="boolean"/>
+                                        <attribute name="element-type" type="tns:DatabaseCollectionElementType"
+                                                   use="required"/>
+                                        <attribute name="element-class-name" type="string"/>
+                                        <attribute name="use-in-text-search" type="boolean"/>
+                                    </extension>
+                                </complexContent>
+                            </complexType>
+                        </element>
+                    </choice>
+                </sequence>
+                <attribute name="hidden" type="boolean" default="false"/>
+                <attribute name="displayName" type="string"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <simpleType name="DatabasePropertyType">
+        <restriction base="string">
+            <enumeration value="STRING"/>
+            <enumeration value="TEXT"/>
+            <enumeration value="LOCAL_DATE"/>
+            <enumeration value="LOCAL_DATE_TIME"/>
+            <enumeration value="INSTANT"/>
+            <enumeration value="ENUM"/>
+            <enumeration value="BOOLEAN"/>
+            <enumeration value="ENTITY_REFERENCE"/>
+            <enumeration value="LONG"/>
+            <enumeration value="INT"/>
+            <enumeration value="UUID"/>
+            <enumeration value="BIG_DECIMAL"/>
+            <enumeration value="ENTITY"/>
+            <enumeration value="TEXT_SEARCH"/>
+        </restriction>
+    </simpleType>
+    <simpleType name="DatabaseCollectionElementType">
+        <restriction base="string">
+            <enumeration value="STRING"/>
+            <enumeration value="ENUM"/>
+            <enumeration value="ENTITY_REFERENCE"/>
+            <enumeration value="UUID"/>
+            <enumeration value="ENTITY"/>
+        </restriction>
+    </simpleType>
+    <complexType name="JoinType">
+        <attribute name="joined-entity" type="string" use="required"/>
+        <attribute name="primary-key" type="string" use="required"/>
+        <attribute name="foreign-key" type="string" use="required"/>
+        <attribute name="included-fields" type="string"/>
+        <attribute name="excluded-fields" type="string"/>
+    </complexType>
+</schema>

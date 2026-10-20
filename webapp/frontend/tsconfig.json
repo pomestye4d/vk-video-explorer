@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "module": "es2022",
+    "moduleResolution": "node",
+    "target": "es2022",
+    "useDefineForClassFields": true,
+    //    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    "declaration": false,                             /* App build (noEmit); declaration emit disabled to avoid TS2742 across the web-admin package boundary. */
+    "declarationMap": false,                          /* Create sourcemaps for d.ts files. */
+    "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    "forceConsistentCasingInFileNames": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": "./",
+    "paths": {
+        "webpeer-core": ["../../submodules/elsa/submodules/webpeer/web/core/src/index"],
+        "web-core": ["../../submodules/elsa/platform/web-core/src/index"],
+        "web-admin": ["../../submodules/elsa/platform/web-admin/src/index"],
+        "admin/*": ["../../submodules/elsa/platform/web-admin/*"],
+        "jtasks/*": ["./*"]
+    }
+  },
+  "include": ["src", "src-gen"],
+}

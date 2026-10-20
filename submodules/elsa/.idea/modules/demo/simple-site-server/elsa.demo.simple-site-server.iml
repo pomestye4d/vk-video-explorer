@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="AdditionalModuleElements">
+    <content url="file://$MODULE_DIR$/../../../../demo/simple-site-server" dumb="true">
+      <excludeFolder url="file://$MODULE_DIR$/../../../../demo/simple-site-server/local-dev/logs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../demo/simple-site-server/local-dev/pg-data" />
+    </content>
+  </component>
+</module>

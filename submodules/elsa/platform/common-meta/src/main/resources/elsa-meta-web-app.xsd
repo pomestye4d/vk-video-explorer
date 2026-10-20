@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://vga.com/elsa/meta-web-app"
+        elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://vga.com/elsa/meta-web-app"
+        xmlns:common="http://vga.com/elsa/meta-common">
+    <element name="web-app">
+        <complexType>
+            <sequence>
+                <choice maxOccurs="unbounded" minOccurs="0">
+                    <group ref="tns:AllRootElementsGroup"/>
+                    <element name="enum">
+                        <complexType>
+                            <complexContent>
+                                <extension base="common:MetaElementType">
+                                    <sequence>
+                                        <element name="enum-item" maxOccurs="unbounded"
+                                                 minOccurs="0" type="common:MetaElementType"/>
+                                    </sequence>
+                                </extension>
+                            </complexContent>
+                        </complexType>
+                    </element>
+                    <element name="entity" type="tns:EntityWithId"/>
+                </choice>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="BaseElementType">
+        <complexContent>
+            <extension base="common:MetaElementType">
+                <sequence>
+                    <element name="server-managed-state" minOccurs="0" type="tns:Entity"/>
+                    <element name="commands-from-server" minOccurs="0">
+                        <complexType>
+                            <sequence>
+                                <element name="command" type="tns:EntityWithId" minOccurs="1"
+                                         maxOccurs="unbounded"/>
+                            </sequence>
+                        </complexType>
+                    </element>
+                    <element name="commands-from-client" minOccurs="0">
+                        <complexType>
+                            <sequence>
+                                <element name="command" type="tns:EntityWithId" minOccurs="1"
+                                         maxOccurs="unbounded"/>
+                            </sequence>
+                        </complexType>
+                    </element>
+                    <element name="input-value" minOccurs="0" type="tns:Entity"/>
+                    <element name="services" minOccurs="0">
+                        <complexType>
+                            <sequence>
+                                <element name="service" type="tns:Service"
+                                         maxOccurs="unbounded"/>
+                            </sequence>
+                        </complexType>
+                    </element>
+                </sequence>
+                <attribute name="class-name" type="string" use="required"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="BaseRootElementType">
+        <sequence>
+            <element name="server-managed-state" minOccurs="0">
+                <complexType>
+                    <sequence>
+                        <choice minOccurs="0" maxOccurs="unbounded">
+                            <element name="property" type="common:PropertyType" minOccurs="0"
+                                     maxOccurs="unbounded"/>
+                            <element name="collection" type="common:CollectionType" minOccurs="0"
+                                     maxOccurs="unbounded"/>
+                        </choice>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="commands-from-server" minOccurs="0">
+                <complexType>
+                    <sequence>
+                        <element name="command" type="tns:EntityWithId" minOccurs="1"
+                                 maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="commands-from-client" minOccurs="0">
+                <complexType>
+                    <sequence>
+                        <element name="command" type="tns:EntityWithId" minOccurs="1"
+                                 maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="input-value" minOccurs="0" type="tns:Entity"/>
+            <element name="services" minOccurs="0">
+                <complexType>
+                    <sequence>
+                        <element name="service" type="tns:Service"
+                                 maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </sequence>
+        <attribute name="class-name" type="string" use="required"/>
+    </complexType>
+    <group name="AllElementsGroup">
+        <choice>
+            <element type="tns:ModalType" name="modal"/>
+            <element type="tns:ContainerType" name="container"/>
+            <element type="tns:CustomContainerType" name="custom-container"/>
+            <element type="tns:ButtonType" name="button"/>
+            <element type="tns:SelectType" name="select"/>
+            <element type="tns:RouterType" name="router"/>
+            <element type="tns:NestedRouterType" name="nested-router"/>
+            <element type="tns:TextAreaType" name="text-area"/>
+            <element type="tns:TextFieldType" name="text-field"/>
+            <element type="tns:TableType" name="table"/>
+            <element type="tns:AutocompleteType" name="autocomplete"/>
+            <element type="tns:LabelType" name="label"/>
+            <element type="tns:CustomType" name="custom"/>
+            <element type="tns:RefType" name="element-ref"/>
+        </choice>
+    </group>
+    <group name="AllRootElementsGroup">
+        <choice>
+            <element type="tns:RootModalType" name="modal"/>
+            <element type="tns:RootContainerType" name="container"/>
+            <element type="tns:RootCustomContainerType" name="custom-container"/>
+            <element type="tns:RootTextFieldType" name="text-field"/>
+            <element type="tns:RootButtonType" name="button"/>
+            <element type="tns:RootAutocompleteType" name="autocomplete"/>
+            <element type="tns:RootCustomType" name="custom"/>
+        </choice>
+    </group>
+
+    <complexType name="RootContainerType">
+        <complexContent>
+            <extension base="tns:BaseRootElementType">
+                <sequence minOccurs="0">
+                    <element name="children">
+                        <complexType>
+                            <sequence>
+                                <choice maxOccurs="unbounded" minOccurs="0">
+                                    <group ref="tns:AllElementsGroup"/>
+                                </choice>
+                            </sequence>
+                        </complexType>
+                    </element>
+                </sequence>
+                <attribute name="managed-configuration"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="RootCustomContainerType">
+        <complexContent>
+            <extension base="tns:BaseRootElementType">
+                <sequence minOccurs="0">
+                    <element name="children">
+                        <complexType>
+                            <sequence>
+                                <choice maxOccurs="unbounded" minOccurs="0">
+                                    <group ref="tns:AllElementsGroup"/>
+                                </choice>
+                            </sequence>
+                        </complexType>
+                    </element>
+                </sequence>
+                <attribute name="managed-configuration"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="ContainerType">
+        <complexContent>
+            <extension base="tns:BaseElementType">
+                <sequence minOccurs="0">
+                    <element name="children">
+                        <complexType>
+                            <sequence>
+                                <choice>
+                                    <group ref="tns:AllElementsGroup"/>
+                                </choice>
+                            </sequence>
+                        </complexType>
+                    </element>
+                </sequence>
+                <attribute name="managed-configuration" type="boolean" default="false"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="CustomContainerType">
+        <complexContent>
+            <extension base="tns:BaseElementType">
+                <sequence minOccurs="0">
+                    <element name="children">
+                        <complexType>
+                            <sequence>
+                                <choice>
+                                    <group ref="tns:AllElementsGroup"/>
+                                </choice>
+                            </sequence>
+                        </complexType>
+                    </element>
+                </sequence>
+                <attribute name="managed-configuration" type="boolean" default="false"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="ModalType">
+        <complexContent>
+            <extension base="tns:ContainerType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="RootModalType">
+        <complexContent>
+            <extension base="tns:RootContainerType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="RouterType">
+        <complexContent>
+            <extension base="tns:BaseElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="NestedRouterType">
+        <complexContent>
+            <extension base="tns:BaseElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="LabelType">
+        <complexContent>
+            <extension base="tns:BaseElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="ButtonType">
+        <complexContent>
+            <extension base="tns:BaseElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="TextAreaType">
+        <complexContent>
+            <extension base="tns:BaseElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="RootTextFieldType">
+        <complexContent>
+            <extension base="tns:BaseRootElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="RootAutocompleteType">
+        <complexContent>
+            <extension base="tns:BaseRootElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="RootButtonType">
+        <complexContent>
+            <extension base="tns:BaseRootElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="TextFieldType">
+        <complexContent>
+            <extension base="tns:BaseElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="SelectType">
+        <complexContent>
+            <extension base="tns:BaseElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="AutocompleteType">
+        <complexContent>
+            <extension base="tns:BaseElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="TableType">
+        <complexContent>
+            <extension base="tns:BaseElementType">
+                <sequence>
+                    <element name="row" type="tns:Entity"/>
+                </sequence>
+                <attribute name="managed-configuration" type="boolean" default="false"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="Entity">
+            <sequence>
+                <element name="property" type="common:PropertyType" minOccurs="0"
+                         maxOccurs="unbounded"/>
+                <element name="collection" type="common:CollectionType" minOccurs="0"
+                         maxOccurs="unbounded"/>
+                <element name="map" type="common:MapType" minOccurs="0"
+                         maxOccurs="unbounded"/>
+            </sequence>
+    </complexType>
+    <complexType name="EntityWithId">
+        <complexContent>
+            <extension base="tns:Entity">
+                <attribute name="id" use="required"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="CustomType">
+        <complexContent>
+            <extension base="tns:BaseElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="RefType">
+        <attribute name="id" use="required"/>
+        <attribute name="class-name" use="required"/>
+    </complexType>
+    <complexType name="RootCustomType">
+        <complexContent>
+            <extension base="tns:BaseRootElementType"/>
+        </complexContent>
+    </complexType>
+    <complexType name="Service">
+        <sequence>
+            <element name="request" type="tns:Entity" minOccurs="0"/>
+            <element name="response" type="tns:Entity"/>
+        </sequence>
+        <attribute name="id" use="required"/>
+    </complexType>
+
+</schema>
